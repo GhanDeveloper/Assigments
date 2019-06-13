@@ -4,16 +4,19 @@ package com.upgrad.FoodOrderingApp.service.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 @Table(
         name = "state"
 )
-/*@NamedQueries({@NamedQuery(
+@NamedQueries({
+        /*@NamedQuery(
         name = "customerByContactNumber",
         query = "select c from CustomerEntity c where c.contactNumber = :contactNumber"
-)
-})*/
+         )  */
+         @NamedQuery(name = "getStateById", query = "SELECT a from StateEntity a WHERE a.id=:id")
+})
 
 public class StateEntity implements Serializable {
 

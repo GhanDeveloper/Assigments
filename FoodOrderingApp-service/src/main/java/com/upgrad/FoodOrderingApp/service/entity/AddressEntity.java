@@ -7,78 +7,57 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table(
-        name = "address"
-)
-/*@NamedQueries({@NamedQuery(
+@Table(name = "address")
+@NamedQueries({
+        /*@NamedQuery(
         name = "customerByContactNumber",
         query = "select c from CustomerEntity c where c.contactNumber = :contactNumber"
-)
-})*/
+        )*/
+
+        @NamedQuery(name = "getAddressById", query = "SELECT a from AddressEntity a WHERE a.id=:id")
+})
 
 public class AddressEntity implements Serializable {
 
     @Id
-    @Column(
-            name = "ID"
-    )
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(
-            name = "UUID"
-    )
-    @Size(
-            max = 200
-    )
+    @Column(name = "UUID")
+    @Size(max = 200)
     private String uuid;
 
-    @Column(
-            name = "FLAT_BUIL_NUMBER"
-    )
+    @Column(name = "FLAT_BUIL_NUMBER")
     //flatBuilNumber can be NULL
     private String flatBuilNumber;
 
-    @Column(
-            name = "LOCALITY"
-    )
+    @Column(name = "LOCALITY")
     //locality can be NULL
     private String locality;
 
-    @Column(
-            name = "CITY"
-    )
+    @Column(name = "CITY")
     //city can be NULL
-    @Size(
-            max = 30
-    )
+    @Size(max = 30)
     private String city;
 
-    @Column(
-            name = "PINCODE"
-    )
+    @Column(name = "PINCODE")
     //pinCode can be NULL
-    @Size(
-            max = 30
-    )
+    @Size(max = 30)
     private String pinCode;
 
     @ManyToOne
-    @OnDelete(
-            action = OnDeleteAction.CASCADE
-    )
-    @JoinColumn(
-            name = "STATE_ID"
-    )
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "STATE_ID")
     private StateEntity state;
 
-    @Column(
-            name="ACTIVE"
-    )
+
+
+    @Column(name="ACTIVE")
     private Integer  active;
 
     public long getId() {

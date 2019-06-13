@@ -3,84 +3,59 @@ package com.upgrad.FoodOrderingApp.service.entity;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import sun.text.normalizer.UCharacter;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.UUID;
 
 @Entity
-@Table(
-        name = "restaurant"
-)
-/*@NamedQueries({@NamedQuery(
-        name = "customerByContactNumber",
-        query = "select c from CustomerEntity c where c.contactNumber = :contactNumber"
-)
-})*/
+@Table(name = "restaurant")
+@NamedQueries({
+        /*@NamedQuery(
+         name = "customerByContactNumber",
+         query = "select c from CustomerEntity c where c.contactNumber = :contactNumber"
+        )*/
+        @NamedQuery(name = "getAllRestaurant" , query = "select r from RestaurantEntity r order by r.customerRating desc ")
+ })
 
 public class RestaurantEntity implements Serializable {
 
     @Id
-    @Column(
-            name = "ID"
-    )
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(
-            name = "UUID"
-    )
-    @Size(
-            max = 200
-    )
-    private String uuid;
+    @Column(name = "UUID")
+    @Size(max = 200)
+    private UUID uuid;
 
-
-    @Column(
-            name = "RESTAURANT_NAME"
-    )
+    @Column(name = "RESTAURANT_NAME")
     @NotNull
-    @Size(
-            max = 50
-    )
+    @Size(max = 50)
     private String restaurantName;
 
-    @Column(
-            name = "PHOTO_URL"
-    )
+    @Column(name = "PHOTO_URL")
     //photoUrl can be NULL
     private String photoUrl;
 
-    @Column(
-            name="CUSTOMER_RATING"
-    )
+    @Column(name="CUSTOMER_RATING")
     @NotNull
+    private BigDecimal customerRating;
 
-    private DecimalFormat customerRating;
-
-    @Column(
-            name = "AVERAGE_PRICE_FOR_TWO"
-    )
+    @Column(name = "AVERAGE_PRICE_FOR_TWO")
     @NotNull
     private Integer averagePriceForTwo;
 
-    @Column(
-            name = "NUMBER_OF_CUSTOMERS_RATED"
-    )
+    @Column(name = "NUMBER_OF_CUSTOMERS_RATED")
     @NotNull
     private Integer numberOfCustomersRated;
 
     @ManyToOne
-    @OnDelete(
-            action = OnDeleteAction.CASCADE
-    )
-    @JoinColumn(
-            name = "ADDRESS_ID"
-    )
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "ADDRESS_ID")
     private AddressEntity address;
 
     public long getId() {
@@ -91,11 +66,11 @@ public class RestaurantEntity implements Serializable {
         this.id = id;
     }
 
-    public String getUuid() {
+    public UUID getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
+    public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
 
@@ -115,11 +90,11 @@ public class RestaurantEntity implements Serializable {
         this.photoUrl = photoUrl;
     }
 
-    public DecimalFormat getCustomerRating() {
+    public BigDecimal getCustomerRating() {
         return customerRating;
     }
 
-    public void setCustomerRating(DecimalFormat customerRating) {
+    public void setCustomerRating(BigDecimal customerRating) {
         this.customerRating = customerRating;
     }
 
