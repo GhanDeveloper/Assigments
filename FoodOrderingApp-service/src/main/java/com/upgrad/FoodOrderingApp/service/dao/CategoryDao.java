@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -14,9 +15,10 @@ public class CategoryDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public CategoryEntity getCategoryById(long restaurantId) {
+    public Arrays getCategoryById(long restaurantId) {
         try {
-            return entityManager.createNamedQuery("getAllCategoryById", CategoryEntity.class).setParameter("restaurantId", restaurantId).getSingleResult();
+           return (Arrays) entityManager.createNamedQuery("getAllCategoryById", CategoryEntity.class).setParameter("restaurantId", restaurantId).getResultList();
+
         } catch (NoResultException nre) {
             return null;
         }

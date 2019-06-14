@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,9 +52,10 @@ public class RestaurantController {
         return new ResponseEntity<List<RestaurantDetailsResponse>>(restaurantResponse, HttpStatus.OK);
     }
 
+
     public List<RestaurantDetailsResponse> Restaurantlist(List<RestaurantEntity> allRestaurant){
         List<RestaurantDetailsResponse> listofrestaurant = new ArrayList<>();
-        List<CategoryList> categoryLists = new ArrayList<>();
+
 
         for ( RestaurantEntity restaurantEntity : allRestaurant){
             RestaurantDetailsResponse Response = new RestaurantDetailsResponse();
@@ -80,18 +82,14 @@ public class RestaurantController {
                responseAddress.state(responseAddressState);
                Response.address(responseAddress);
 
+         /* Arrays categoryLists;
 
+            categoryLists = categoryBusinessService.getAllCategoryById(restaurantEntity.getId());
+              CatgoryList categoryList = new CategoryList();
+                categoryList.categoryName(categoryEntity.getCategoryName());
+                categoryLists.add(categoryList);
+                Response.categories(categoryLists);*/
 
-         /*  CategoryEntity categoryEntity = categoryBusinessService.getAllCategoryById(restaurantEntity.getId());
-               CategoryList categoryList = new CategoryList();
-
-               categoryList.id(UUID.fromString(categoryEntity.getUuid()));
-               categoryList.categoryName(categoryEntity.getCategoryName());
-
-              categoryLists.add(categoryList);
-
-
-            Response.categories(categoryLists);*/
 
             listofrestaurant.add(Response);
         }

@@ -13,9 +13,9 @@ import java.io.Serializable;
         query = "select c from CustomerEntity c where c.contactNumber = :contactNumber"
         )*/
 
-        @NamedQuery(name = "getAllCategoryById" , query = "select c from CategoryEntity c  " +
+        @NamedQuery(name = "getAllCategoryById" , query = "select categoryName from CategoryEntity c  " +
                 "INNER JOIN RestaurantCategoryEntity rc on c.id = rc.category " +
-                "INNER JOIN RestaurantEntity r on rc.restaurant = r.id Where r.id =:restaurantId order by c.categoryName")
+                "INNER JOIN RestaurantEntity r on rc.restaurant = r.id Where r.id =:restaurantId")
 })
 public class CategoryEntity implements Serializable {
 

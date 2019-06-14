@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -17,7 +18,7 @@ public class CategoryBusinessService {
     private CategoryDao categoryDao;
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public CategoryEntity getAllCategoryById(long restaurantId){
+    public Arrays getAllCategoryById(long restaurantId){
         return categoryDao.getCategoryById(restaurantId);
     }
 
